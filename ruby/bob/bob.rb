@@ -1,20 +1,27 @@
 class Bob
   def hey(what)
-    return "Whatever." if what.match(/\n/)
-    return "Fine. Be that way!" if what.strip.empty?
-    return "Woah, chill out!" if yelling(what.strip)
-    return "Sure." if question(what.strip)
-    return "Whatever."
+    case
+    when what.match(/\n/)
+      "Whatever."
+    when what.strip.empty?
+      "Fine. Be that way!"
+    when yelling?(what.strip)
+      "Woah, chill out!"
+    when question?(what.strip)
+      "Sure."
+    else
+      "Whatever."
+    end
   end
 
-  def yelling(string)
+  def yelling?(string)
     # Must have letters that are all caps
     return unless string.match(/[a-zA-Z]/)
     string.upcase == string
   end
 
-  def question(string)
+  def question?(string)
     # Ends with a question mark
-    string =~ /\?$/
+    string.match(/\?$/)
   end
 end
